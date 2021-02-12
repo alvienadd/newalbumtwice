@@ -1,18 +1,18 @@
 [
   {
     "id"  : 1,
-    "name": "GMS ALBUM HOME",
+    "name": "OST TRUE BEAUTY",
     "type": "Pria",
     "category":"PL",
     "tracks": [
       {
         "id"  : 1,
-        "name": "Welcome Home",
+        "name": "Call Me Maybe",
         "duration": 208
       },
       {
         "id"  : 2,
-        "name": "Another Home",
+        "name": "I am in the mood for dancing",
         "duration": 208
       }
     ],
@@ -20,13 +20,13 @@
   },
   {
     "id"  : 2,
-    "name": "OST MR QUEEN",
-    "type": "Wanita",
+    "name": "OST SCARLET HEART RYEO",
+    "type": "Pria",
     "category":"PL",
     "tracks": [
       {
         "id"  : 1,
-        "name": "Bonghwana",
+        "name": "For You",
         "duration": 208
       }
     ],
