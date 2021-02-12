@@ -4,7 +4,7 @@ import 'DataTokoh.dart';
 
 class Services{
 
-  static const String url='https://raw.githubusercontent.com/alvienadd/seratustokohalkitab/master/lib/models/datatokoh.json';
+  static const String url='https://raw.githubusercontent.com/alvienadd/newalbumtwice/master/lib/models/datatokoh.json';
 
   static Future<List<DataTokoh>> getDataTokoh() async{
     try{
