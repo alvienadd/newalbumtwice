@@ -227,7 +227,7 @@ class _DetailPriaState extends State<DetailPria> with SingleTickerProviderStateM
                               onTap: () {
                                 if (playing) {
                                   //now let's play the song
-                                  // cache.play('${tracks[index].songPath}');
+                                  cache.play('${tracks[index].duration}');
                                   setState(() {
                                     // _playId = tracks[index];
                                     playing = false;
@@ -243,7 +243,7 @@ class _DetailPriaState extends State<DetailPria> with SingleTickerProviderStateM
                                       pauseBtn = Icons.play_arrow;
                                     });
                                   } else {
-                                    // cache.play('${_list[index].songPath}');
+                                    cache.play('${tracks[index].duration}');
                                     setState(() {
                                       // _playId = tracks[index];
                                     });
