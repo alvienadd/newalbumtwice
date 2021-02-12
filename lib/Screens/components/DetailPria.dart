@@ -216,18 +216,18 @@ class _DetailPriaState extends State<DetailPria> with SingleTickerProviderStateM
                               ]),
                           CustomButtonWidget(
                               child: Icon(
-                                  tracks[index] == _playId
+                                  tracks[index].id == _playId
                                       ? pauseBtn
                                       : playBtn,
-                                  color: tracks[index] == _playId
+                                  color: tracks[index].id == _playId
                                       ? Colors.white
                                       : AppColors.styleColor),
                               size: 50,
-                              isActive: tracks[index] == _playId,
+                              isActive: tracks[index].id == _playId,
                               onTap: () {
                                 if (playing) {
                                   //now let's play the song
-                                  cache.play('${tracks[index].duration}');
+                                  _player.play('${tracks[index].path}',isLocal: true);
                                   setState(() {
                                     // _playId = tracks[index];
                                     playing = false;
@@ -235,7 +235,7 @@ class _DetailPriaState extends State<DetailPria> with SingleTickerProviderStateM
                                     pauseBtn = Icons.pause;
                                   });
                                 } else if (!playing) {
-                                  if (tracks[index] == _playId) {
+                                  if (tracks[index].id == _playId) {
                                     _player.pause();
                                     setState(() {
                                       playing = true;
@@ -243,7 +243,7 @@ class _DetailPriaState extends State<DetailPria> with SingleTickerProviderStateM
                                       pauseBtn = Icons.play_arrow;
                                     });
                                   } else {
-                                    cache.play('${tracks[index].duration}');
+                                    _player.play('${tracks[index].path}',isLocal: true);
                                     setState(() {
                                       // _playId = tracks[index];
                                     });

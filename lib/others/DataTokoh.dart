@@ -25,7 +25,7 @@ class DataTokoh {
     List<Track> tracks;
     String description;
 
-    factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+    factory DataTokoh.fromJson(Map<String, dynamic> json) => DataTokoh(
         id: json["id"],
         name: json["name"],
         type: json["type"],

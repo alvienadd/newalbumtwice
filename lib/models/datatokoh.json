@@ -8,19 +8,19 @@
       {
         "id"  : 1,
         "name": "Call Me Maybe",
-        "path":"https://raw.githubusercontent.com/alvienadd/ostkdramastartup/master/1-Saya-CallMeMaybe.mp3",
+        "path":"https://raw.githubusercontent.com/alvienadd/osttruebeauty/master/1-Saya-CallMeMaybe.mp3",
         "duration":208
       },
       {
         "id"  : 2,
         "name": "I am in the mood for dancing",
-        "path":"https://raw.githubusercontent.com/alvienadd/ostkdramastartup/master/2-YujuGfriend-Iminthemoodfordancing.mp3",
+        "path":"https://raw.githubusercontent.com/alvienadd/osttruebeauty/master/2-YujuGfriend-Iminthemoodfordancing.mp3",
         "duration":208
       },
       {
         "id"  : 3,
         "name": "Happy Ending",
-        "path": "https://raw.githubusercontent.com/alvienadd/ostkdramastartup/master/1-Saya-CallMeMaybe.mp3",
+        "path": "https://raw.githubusercontent.com/alvienadd/osttruebeauty/master/1-Saya-CallMeMaybe.mp3",
         "duration":208
       }
     ],
@@ -35,7 +35,7 @@
       {
         "id"  : 1,
         "name": "For You",
-        "path": "https://raw.githubusercontent.com/alvienadd/ostkdramastartup/master/2-YujuGfriend-Iminthemoodfordancing.mp3",
+        "path": "https://raw.githubusercontent.com/alvienadd/osttruebeauty/master/2-YujuGfriend-Iminthemoodfordancing.mp3",
         "duration":208
       }
     ],
