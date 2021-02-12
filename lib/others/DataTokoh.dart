@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final welcome = welcomeFromJson(jsonString);
+//     final welcome = datatokoh(jsonString);
 
 import 'dart:convert';
 
-List<Welcome> welcomeFromJson(String str) => List<Welcome>.from(json.decode(str).map((x) => Welcome.fromJson(x)));
+List<DataTokoh> DataTokohFromJson(String str) => List<DataTokoh>.from(json.decode(str).map((x) => DataTokoh.fromJson(x)));
 
-String welcomeToJson(List<Welcome> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String DataTokohToJson(List<DataTokoh> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Welcome {
-    Welcome({
+class DataTokoh {
+    DataTokoh({
         this.id,
         this.name,
         this.type,
@@ -25,7 +25,7 @@ class Welcome {
     List<Track> tracks;
     String description;
 
-    factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+    factory DataTokoh.fromJson(Map<String, dynamic> json) => DataTokoh(
         id: json["id"],
         name: json["name"],
         type: json["type"],
