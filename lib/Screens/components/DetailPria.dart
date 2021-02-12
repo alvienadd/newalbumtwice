@@ -245,7 +245,7 @@ class _DetailPriaState extends State<DetailPria> with SingleTickerProviderStateM
                                   } else {
                                     _player.play('${tracks[index].path}',isLocal: true);
                                     setState(() {
-                                      // _playId = tracks[index];
+                                      _playId = tracks[index].id;
                                     });
                                   }
                                 }
