@@ -1,6 +1,6 @@
 // To parse this JSON data, do
 //
-//     final welcome = datatokoh(jsonString);
+//     final welcome = welcomeFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -25,7 +25,7 @@ class DataTokoh {
     List<Track> tracks;
     String description;
 
-    factory DataTokoh.fromJson(Map<String, dynamic> json) => DataTokoh(
+    factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
         id: json["id"],
         name: json["name"],
         type: json["type"],
@@ -46,20 +46,28 @@ class DataTokoh {
 
 class Track {
     Track({
+        this.id,
         this.name,
+        this.path,
         this.duration,
     });
 
+    int id;
     String name;
-    String duration;
+    String path;
+    int duration;
 
     factory Track.fromJson(Map<String, dynamic> json) => Track(
+        id: json["id"],
         name: json["name"],
+        path: json["path"],
         duration: json["duration"],
     );
 
     Map<String, dynamic> toJson() => {
+        "id": id,
         "name": name,
+        "path": path,
         "duration": duration,
     };
 }
