@@ -51,7 +51,7 @@ class Track {
     });
 
     String name;
-    int duration;
+    String duration;
 
     factory Track.fromJson(Map<String, dynamic> json) => Track(
         name: json["name"],
