@@ -6,6 +6,8 @@ import 'package:newalbumtwice/widgets/custom_button_widget.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 
+
+
 class DetailPria extends StatefulWidget {
   final DataTokoh args;
 
@@ -54,11 +56,6 @@ class _DetailPriaState extends State<DetailPria> with SingleTickerProviderStateM
   Duration position = new Duration();
   Duration musicLength = new Duration();
 
- 
-
-  
-
-    
    //we will create a custom slider
 
   Widget slider() {
@@ -122,6 +119,50 @@ class _DetailPriaState extends State<DetailPria> with SingleTickerProviderStateM
     //               interstitial: true);
   }
 
+
+  createAlertDialog(BuildContext context){
+    return showDialog(context: context,builder:(context){
+      return AlertDialog(
+        title:Text('${widget.args.tracks[_playId-1].name}'),
+        content: Text('${widget.args.tracks[_playId-1].lyrics}')
+      );
+    });
+  }
+
+  Future<bool> _onBackPressed(){
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   super.dispose();
+  //   _player.pause();
+
+  // }
+  return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Are you sure?'),
+            content: Text('You are going to Main Menu?'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('NO'),
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+              ),
+              FlatButton(
+                child: Text('YES'),
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                 _player.pause();
+
+                },
+              ),
+            ],
+          );
+        });
+}
+
   @override
   Widget build(BuildContext context) {
 
@@ -131,144 +172,160 @@ class _DetailPriaState extends State<DetailPria> with SingleTickerProviderStateM
 
     return Scaffold(
   
-
-      body: Stack(children: <Widget>[
-            Column(children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      CustomButtonWidget(
-                        child:
-                            Icon(Icons.favorite, color: AppColors.styleColor),
-                        size: 50,
-                        onTap: () {},
-                      ),
-                      AnimatedBuilder(
-                        animation: _controller,
-                        builder: (_, child) {
-                          return Transform.rotate(
+      backgroundColor: const Color(0xFF212121),
+      body: WillPopScope(
+            onWillPop: _onBackPressed,
+              child: Stack(children: <Widget>[
+              Column(children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        CustomButtonWidget(
+                          child:
+                              Icon(Icons.favorite, color: AppColors.styleColor),
+                          size: 50,
+                          onTap: () {},
+                        ),
+                        AnimatedBuilder(
+                          animation: _controller,
+                          builder: (_, child) {
+                            return  playing?Transform.rotate(
+                            angle: _controller.value *0*0,
+                            child: child,
+                          ):Transform.rotate(
                             angle: _controller.value * 2 * 3.14,
                             child: child,
                           );
-                        },
-                        child: CustomButtonWidget(
-                          image: "assets/icons/bible1.png",
-                          size: 150,
-                          borderWidth: 5,
-                          onTap: () {},
+                          },
+                          child: CustomButtonWidget(
+                            image: "assets/icons/bible1.png",
+                            size: 150,
+                            borderWidth: 5,
+                            onTap: () {},
+                          ),
                         ),
-                      ),
-                   Column(
-                children: <Widget>[
-                  Center(
-                    child: Switch(
-                        value: _light,
-                        onChanged: (state) {
-                          setState(() {
-                            _light = state;
-                          });
-                        }),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom:12.0),
-                    child: Container(
-                      child:_light ?Text('Dark Mode'):Text('Light Mode')
-                    ),
-                  ),
-                ],
-              ),
-                    ]),
-              ),
-              slider(),
-              
-              //  RaisedButton(
-              //             child: Text('Show interstitial ad'),
-              //             onPressed: () async {
-              //               await StartApp.showInterstitialAd();
-              //             }),
-              Expanded(
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: tracks.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          color: tracks[index] == _playId
-                              ? AppColors.activeColor
-                              : AppColors.mainColor,
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      padding: EdgeInsets.all(16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  tracks[index].name,
-                                  style: TextStyle(
-                                      color: AppColors.styleColor,
-                                      fontSize: 16),
-                                ),
-                               
-                              ]),
-                          CustomButtonWidget(
-                              child: Icon(
-                                  tracks[index].id == _playId
-                                      ? pauseBtn
-                                      : playBtn,
-                                  color: tracks[index].id == _playId
-                                      ? Colors.white
-                                      : AppColors.styleColor),
-                              size: 50,
-                              isActive: tracks[index].id == _playId,
-                              onTap: () {
-                                if (playing) {
-                                  //now let's play the song
-                                  _player.play('${tracks[index].path}',isLocal: true);
-                                  setState(() {
-                                    // _playId = tracks[index];
-                                    playing = false;
-                                    playBtn = Icons.play_arrow;
-                                    pauseBtn = Icons.pause;
-                                  });
-                                } else if (!playing) {
-                                  if (tracks[index].id == _playId) {
-                                    _player.pause();
-                                    setState(() {
-                                      playing = true;
-                                      playBtn = Icons.play_arrow;
-                                      pauseBtn = Icons.play_arrow;
-                                    });
-                                  } else {
+                //      Column(
+                //   children: <Widget>[
+                //     Center(
+                //       child: Switch(
+                //           value: _light,
+                //           onChanged: (state) {
+                //             setState(() {
+                //               _light = state;
+                //             });
+                //           }),
+                //     ),
+                //     Padding(
+                //       padding: const EdgeInsets.only(bottom:12.0),
+                //       child: Container(
+                //         child:_light ?Text('Dark Mode'):Text('Light Mode')
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                   CustomButtonWidget(
+                          child:
+                              Icon(Icons.list, color: AppColors.styleColor),
+                          size: 50,
+                          onTap: () {
+                            createAlertDialog(context);
+                          },
+                        ),
+
+                      ]),
+                ),
+                slider(),
+                
+                //  RaisedButton(
+                //             child: Text('Show interstitial ad'),
+                //             onPressed: () async {
+                //               await StartApp.showInterstitialAd();
+                //             }),
+                Expanded(
+                  child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    itemCount: tracks.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                            color: tracks[index] == _playId
+                                ? AppColors.activeColor
+                                : AppColors.mainColor,
+                            borderRadius: BorderRadius.all(Radius.circular(20))),
+                        padding: EdgeInsets.all(16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    tracks[index].name,
+                                    style: TextStyle(
+                                        color: AppColors.styleColor,
+                                        fontSize: 16),
+                                  ),
+                                 
+                                ]),
+                            CustomButtonWidget(
+                                child: Icon(
+                                    tracks[index].id == _playId
+                                        ? pauseBtn
+                                        : playBtn,
+                                    color: tracks[index].id == _playId
+                                        ? Colors.white
+                                        : AppColors.styleColor),
+                                size: 50,
+                                isActive: tracks[index].id == _playId,
+                                onTap: () {
+                                  if (playing) {
+                                    //now let's play the song
                                     _player.play('${tracks[index].path}',isLocal: true);
+                                    
                                     setState(() {
                                       _playId = tracks[index].id;
+                                      playing = false;
+                                      playBtn = Icons.play_arrow;
+                                      pauseBtn = Icons.pause;
                                     });
+                                  } else if (!playing) {
+                                    if (tracks[index].id == _playId) {
+                                      _player.pause();
+                                      setState(() {
+                                        playing = true;
+                                        playBtn = Icons.play_arrow;
+                                        pauseBtn = Icons.play_arrow;
+                                      });
+                                    } else {
+                                      _player.play('${tracks[index].path}',isLocal: true);
+                                      setState(() {
+                                        _playId = tracks[index].id;
+                                      });
+                                    }
                                   }
-                                }
-                              })
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              )
+                                })
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                )
+              ]),
+              // Align(
+              //   alignment: Alignment.bottomCenter,
+              //   child: Container(
+              //     height: 20,
+              //     decoration: BoxDecoration(
+              //         gradient: LinearGradient(colors: [
+              //       AppColors.mainColor.withAlpha(0),
+              //       AppColors.mainColor
+              //     ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+              //   ),
+              // ),
             ]),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 20,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                  AppColors.mainColor.withAlpha(0),
-                  AppColors.mainColor
-                ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-              ),
-            ),
-          ]),
+      ),
 
         // body: ListView.builder(
         //           physics: BouncingScrollPhysics(),

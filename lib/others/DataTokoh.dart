@@ -50,18 +50,21 @@ class Track {
         this.name,
         this.path,
         this.duration,
+        this.lyrics,
     });
 
     int id;
     String name;
     String path;
     int duration;
+    String lyrics;
 
     factory Track.fromJson(Map<String, dynamic> json) => Track(
         id: json["id"],
         name: json["name"],
         path: json["path"],
         duration: json["duration"],
+        lyrics: json["lyrics"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -69,5 +72,6 @@ class Track {
         "name": name,
         "path": path,
         "duration": duration,
+        "lyrics": lyrics,
     };
 }
