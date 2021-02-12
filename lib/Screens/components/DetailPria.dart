@@ -14,16 +14,30 @@ class DetailPria extends StatefulWidget {
 }
 
 class _DetailPriaState extends State<DetailPria> {
+
+   List<DataTokoh> _list;
+
   @override
   Widget build(BuildContext context) {
 
     // double width=MediaQuery.of(context).size.width;
     // double height=MediaQuery.of(context).size.height;
-    var id=widget.args.id-1;
+    var id=widget.args.tracks;
 
     return Scaffold(
   
-        body: Center(child: Text("${widget.args.tracks[id].name}"))
+        body: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: _list.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                        child:Column(
+                          
+                        )
+                    )})
+        
+        
+        // Center(child: Text("${widget.args.tracks[id].name}"))
       
     );
   }
